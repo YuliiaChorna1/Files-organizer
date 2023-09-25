@@ -40,11 +40,10 @@ def move_file(file:Path, category:str, root_dir:Path, is_normalized:bool=True) -
             print(f"FAILED creating directory '{target_dir}' with error: {error}")
     name = normalize(file.stem) if is_normalized else file.stem
     new_path = target_dir.joinpath(name + file.suffix)
-    if not new_path.exists():
-        try:
-            file.replace(new_path)
-        except Exception as error:
-            print(f"FAILED moving file '{file}' with error: {error}")
+    try:
+        file.replace(new_path)
+    except Exception as error:
+        print(f"FAILED moving file '{file}' with error: {error}")
     return new_path
 
 def sort_folder(path:Path) -> None:
